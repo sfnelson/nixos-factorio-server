@@ -2,9 +2,9 @@
   imports = [
     <nixpkgs/nixos/modules/virtualisation/amazon-image.nix>
     (builtins.fetchTarball {
-      url = "https://github.com/thefloweringash/nixos-factorio-server/archive/master.tar.gz";
+      url = "https://github.com/sfnelson/nixos-factorio-server/archive/factorio/imilongi.tar.gz";
     } + "/nixos/configuration.nix")
   ];
 
-  # factorio-server.password = "...";
+  factorio-server.password = "auntymeg";
 }

@@ -17,6 +17,8 @@ let
     "0.18.18" = "1ni71p60cz1x07gj5syyamyk1k4d4xfsvdmd4p334w556ka9mvaf";
     "1.0.0"   = "0r0lplns8nxna2viv8qyx9mp4cckdvx6k20w2g2fwnj3jjmf3nc1";
     "1.1.19"  = "0w0ir1dzx39vq1w09ikgw956q1ilq6n0cyi50arjhgcqcg44w1ks";
+    "1.1.21"  = "038342z429cavdp2q3mjczlprw83nca030mjlipjppr43bzg9db0";
+    "1.1.25"  = "0xirxdf41sdsgcknvhdfg6rm12bwmg86bl4ml6ap1skifk8dlia1";
   };
 
   setFactorioVersion = version: drv: drv.overrideAttrs (attrs: {
@@ -35,25 +37,10 @@ let
         (builtins.fromJSON (builtins.readFile ./map.json));
     in rec {
       ordinal = 0;
-      version = "1.1.19";
+      version = "1.1.25";
       factorioConfig = {
         game-password = cfg.password;
-        saveName = "Speedrun";
-      };
-      nixosConfig = { config, lib, ... }: let
-        cfg = config.services.factorio;
-        stateDir = "/var/lib/factorio";
-        savePath = "${stateDir}/saves/${factorioConfig.saveName}.zip";
-      in {
-        systemd.services.factorio.preStart = lib.mkForce ''
-          if [ ! -e ${savePath} ]; then
-            ${cfg.package}/bin/factorio \
-              --config=${cfg.configFile} \
-              --create=${savePath} \
-              --map-settings=${mapConfig.map_settings} \
-              --map-gen-settings=${mapConfig.map_gen_settings}
-          fi
-        '';
+        saveName = "Imilongi";
       };
     };
   };
@@ -84,7 +71,7 @@ let
           saveName = name;
           package = setFactorioVersion version pkgs.factorio-headless;
           extraSettings = {
-            admins = [ "thefloweringash" ];
+            admins = [ "sfnelson" ];
           };
         } // factorioConfig);
       };
